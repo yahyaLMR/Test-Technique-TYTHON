@@ -1,3 +1,13 @@
+/*
+  Server entrypoint
+  - Loads environment variables
+  - Sets up Express middleware and JSON body parsing helper
+  - Connects to MongoDB and mounts API routes
+  - Includes error handling and a simple health endpoint
+
+  Important: the custom JSON parsing middleware tolerates nested/stringified JSON bodies
+  sent with content-type application/json to improve compatibility with some clients.
+*/
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');

@@ -1,5 +1,12 @@
+/*
+  Patient controller
+  - createPatient: validates input, prevents duplicate CIN, and sets `createdBy` from `req.user`
+  - listPatients: supports simple search and pagination; returns a compact response when no query
+  - update/delete/get: standard CRUD with validation and error handling
+*/
 const Patient = require('../models/Patient');
 
+// Normalize empty/whitespace-only strings to undefined for cleaner DB storage
 const cleanString = (value) => {
   if (typeof value !== 'string') return value;
   const trimmed = value.trim();

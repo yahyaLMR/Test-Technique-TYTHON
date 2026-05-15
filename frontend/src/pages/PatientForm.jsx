@@ -1,3 +1,9 @@
+/*
+  PatientForm
+  - Handles both creation and editing of Patient records
+  - `isEdit` prop switches behavior: when true, the form fetches existing data
+  - Uses `patientsAPI` for backend interactions and navigates back to `/patients` on success
+*/
 import  { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { patientsAPI } from '../services/api';

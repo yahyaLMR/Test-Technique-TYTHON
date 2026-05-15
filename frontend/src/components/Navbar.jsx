@@ -1,3 +1,8 @@
+/*
+  Navbar component
+  - Renders main navigation links and the current user's email
+  - Uses `useAuth` to show/hide items based on authentication and role
+*/
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Navbar.css';

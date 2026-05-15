@@ -1,3 +1,9 @@
+/*
+  API client wrapper
+  - Centralizes axios instance configuration and request/response interceptors
+  - Interceptor automatically attaches `Authorization: Bearer <token>` when a token is present in localStorage
+  - On 401 responses we clear local token and redirect to `/login` to force re-authentication
+*/
 import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -9,35 +15,32 @@ const api = axios.create({
   },
 });
 
-// Add token to request headers
+// Attach token to outgoing requests when available
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-// Handle 401 responses
+// Global response handler: on 401 clear token and redirect to login
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
-      window.location.href = '/login';
+      // Use location replace to avoid keeping a bad history entry
+      window.location.replace('/login');
     }
     return Promise.reject(error);
   }
 );
 
-// Auth endpoints
+// Export organized API groups to keep call sites readable
 export const authAPI = {
-  login: (email, password) =>
-    api.post('/auth/login', { email, password }),
+  login: (email, password) => api.post('/auth/login', { email, password }),
   me: () => api.get('/auth/me'),
 };
 
-// Users endpoints
 export const usersAPI = {
   list: () => api.get('/users'),
   create: (data) => api.post('/users', data),
@@ -46,7 +49,6 @@ export const usersAPI = {
   delete: (id) => api.delete(`/users/${id}`),
 };
 
-// Patients endpoints
 export const patientsAPI = {
   create: (data) => api.post('/patients', data),
   list: (params = {}) => api.get('/patients', { params }),
@@ -55,7 +57,6 @@ export const patientsAPI = {
   delete: (id) => api.delete(`/patients/${id}`),
 };
 
-// Appointments endpoints
 export const appointmentsAPI = {
   create: (data) => api.post('/appointments', data),
   list: (params = {}) => api.get('/appointments', { params }),

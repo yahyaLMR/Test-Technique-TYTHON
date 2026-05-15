@@ -1,8 +1,14 @@
+/*
+  Authentication & Authorization middleware
+  - `protect`: verifies JWT from Authorization header and attaches `req.user` ({ id, role })
+  - `authorize`: higher-order middleware to restrict access to specific roles
+*/
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'change_this_secret';
 
+// Verify token and attach minimal user info to `req.user` for downstream handlers
 exports.protect = async (req, res, next) => {
   try {
     let token;
@@ -23,6 +29,7 @@ exports.protect = async (req, res, next) => {
   }
 };
 
+// Usage: authorize('admin'), authorize('admin', 'staff')
 exports.authorize = (...roles) => (req, res, next) => {
   if (!req.user) return res.status(401).json({ message: 'Not authorized' });
   if (!roles.includes(req.user.role)) return res.status(403).json({ message: 'Forbidden' });

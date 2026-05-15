@@ -1,3 +1,9 @@
+/*
+  Patient model
+  - Stores basic patient information and a required `createdBy` reference to the User who created the record
+  - Includes indexes to optimize common queries (name, phone)
+  - `pre('save')` updates `updatedAt` timestamp automatically
+*/
 const mongoose = require('mongoose');
 
 const patientSchema = new mongoose.Schema({
@@ -40,6 +46,8 @@ const patientSchema = new mongoose.Schema({
 patientSchema.index({ phone: 1 });
 patientSchema.index({ name: 1 });
 
+
+// Keep `updatedAt` in sync on save
 patientSchema.pre('save', function() {
   this.updatedAt = Date.now();
 });

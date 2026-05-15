@@ -1,0 +1,16 @@
+{
+  "name": "Medical Appointment System",
+  "short_name": "MedAppointments",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#863bff",
+  "description": "Manage patients and appointments quickly and securely.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "48x46",
+      "type": "image/svg+xml"
+    }
+  ]
+}

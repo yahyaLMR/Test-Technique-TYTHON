@@ -1,3 +1,9 @@
+/*
+  AppointmentForm
+  - Handles creating and editing appointments
+  - Enforces required fields client-side and delegates validation to the API
+  - When `isEdit` is true, the form fetches the existing appointment
+*/
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { appointmentsAPI, patientsAPI } from '../services/api';

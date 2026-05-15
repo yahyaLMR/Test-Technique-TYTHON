@@ -1,3 +1,11 @@
+/*
+  Appointment controller
+  - createAppointment enforces required fields and a business rule: when an appointment
+    is created or confirmed as `confirmed`, there must not be another confirmed appointment
+    for the same patient within the previous 30 minutes.
+  - listAppointments supports filtering by date/status/patientId
+  - updateAppointment enforces role-based field restrictions for `staff` users
+*/
 const Appointment = require('../models/Appointment');
 
 exports.createAppointment = async (req, res) => {

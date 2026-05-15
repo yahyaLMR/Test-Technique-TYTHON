@@ -1,3 +1,8 @@
+/*
+  Authentication context
+  - Provides `user`, `token`, `loading`, `isAuthenticated`, `login`, `logout` to the app
+  - On mount the provider checks `localStorage.token`, attempts to validate it via `authAPI.me()`
+*/
 import React, { createContext, useState, useEffect } from 'react';
 import { authAPI } from '../services/api';
 

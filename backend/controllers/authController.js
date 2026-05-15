@@ -1,3 +1,9 @@
+/*
+  Authentication controller
+  - register/login endpoints produce JWT tokens and return minimal user info
+  - `register` restricts creating admin users to existing admin requesters (by JWT)
+  - `me` returns the authenticated user's profile
+*/
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');

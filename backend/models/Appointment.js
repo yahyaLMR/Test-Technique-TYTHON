@@ -1,3 +1,9 @@
+/*
+  Appointment model
+  - Links to `Patient` via `patientId` and records appointment metadata
+  - Enforces status enum and provides indexes for common lookups
+  - `createdBy` is required to track who created the appointment (audit)
+*/
 const mongoose = require('mongoose');
 
 const appointmentSchema = new mongoose.Schema({
@@ -46,6 +52,7 @@ appointmentSchema.index({ patientId: 1 });
 appointmentSchema.index({ status: 1 });
 appointmentSchema.index({ appointmentDate: 1 });
 
+// Update `updatedAt` timestamp whenever the document is saved
 appointmentSchema.pre('save', function() {
   this.updatedAt = Date.now();
 });

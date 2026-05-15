@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { patientsAPI, appointmentsAPI } from '../services/api';
 import '../styles/PatientDetails.css';
+import { Edit2 } from 'lucide-react';
 
 const PatientDetails = () => {
   const { id } = useParams();
@@ -115,7 +116,7 @@ const PatientDetails = () => {
                   <td>{appt.diagnosis || '-'}</td>
                   <td>{appt.followUpRequired ? 'Yes' : 'No'}</td>
                   <td>
-                    <Link to={`/appointments/${appt._id}/edit`} className="edit-btn-small">Edit</Link>
+                    <Link to={`/appointments/${appt._id}/edit`} style={{"color":"white"}} className="edit-btn-small"><Edit2 size={14} style={{ marginRight: 6}}/>Edit</Link>
                   </td>
                 </tr>
               ))}

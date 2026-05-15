@@ -1,3 +1,8 @@
+/*
+  User model
+  - Stores email (unique), password (hashed), role (admin|staff), and timestamps
+  - Passwords are hashed before save using bcrypt
+*/
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -24,12 +29,9 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Hash password before saving
+// Hash password before saving. Only re-hash when the `password` field changes.
 userSchema.pre('save', async function() {
-  if (!this.isModified('password')) {
-    return;
-  }
-
+  if (!this.isModified('password')) return;
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });

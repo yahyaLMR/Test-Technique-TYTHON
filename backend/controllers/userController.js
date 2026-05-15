@@ -1,3 +1,8 @@
+/*
+  User controller
+  - Administrative endpoints to create/list/get/update/delete users
+  - Protects against role escalation by non-admins and never returns passwords
+*/
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
