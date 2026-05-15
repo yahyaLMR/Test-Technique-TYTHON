@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { patientsAPI, appointmentsAPI } from '../services/api';
 import '../styles/Dashboard.css';
+import { Users, Calendar } from 'lucide-react';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -72,12 +73,12 @@ const Dashboard = () => {
 
         <div className="dashboard-grid">
           <div className="dashboard-card">
-            <h3>Manage Patients</h3>
+            <h3><Users size={18} style={{ marginRight: 8 }} /> Manage Patients</h3>
             <p>View, search, and manage patient information</p>
             <Link to="/patients" className="card-link">Go to Patients →</Link>
           </div>
           <div className="dashboard-card">
-            <h3>Schedule Appointments</h3>
+            <h3><Calendar size={18} style={{ marginRight: 8 }} /> Schedule Appointments</h3>
             <p>Create and manage medical appointments</p>
             <Link to="/appointments" className="card-link">Go to Appointments →</Link>
           </div>

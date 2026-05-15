@@ -41,3 +41,22 @@ select,
 textarea {
   font: inherit;
 }
+.back-button {
+  background: none;
+  border: none;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  color: #667eea;
+  text-decoration: none;
+  margin-bottom: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding: 0;
+  transition: color 0.3s;
+}
+
+.back-button:hover {
+  color: #764ba2;
+}

@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Login.css';
+import { LogIn } from 'lucide-react';
 
 const Login = () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
@@ -63,8 +64,8 @@ const Login = () => {
               disabled={loading}
             />
           </div>
-          <button type="submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
+          <button type="submit" disabled={loading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {loading ? (<><LogIn size={14} style={{ marginRight: 8 }} />Logging in...</>) : (<><LogIn size={14} style={{ marginRight: 8 }} />Login</>)}
           </button>
         </form>
       </div>

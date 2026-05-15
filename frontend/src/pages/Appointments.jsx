@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { appointmentsAPI } from '../services/api';
 import '../styles/Appointments.css';
+import { Plus, X, RefreshCw, Edit2, Trash2 } from 'lucide-react';
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -59,7 +60,7 @@ const Appointments = () => {
           <h1>Appointments</h1>
           <p>Track upcoming visits, statuses, and follow-ups.</p>
         </div>
-        <Link to="/appointments/add" className="add-btn">+ Add Appointment</Link>
+        <Link to="/appointments/add" className="add-btn"><Plus size={14} style={{ marginRight: 6 }} /> Add Appointment</Link>
       </div>
 
       <div className="appointments-filters">
@@ -82,12 +83,12 @@ const Appointments = () => {
           />
         </div>
 
-        <button onClick={() => { setFilterStatus(''); setFilterDate(''); }} className="clear-filters">
-          Clear Filters
+        <button onClick={() => { setFilterStatus(''); setFilterDate(''); }} className="clear-filters" style={{ display: 'flex', alignItems: 'center' }}>
+          <X size={14} style={{ marginRight: 8 }} /> Clear Filters
         </button>
 
-        <button onClick={fetchAppointments} disabled={loading} className="refresh-btn">
-          {loading ? 'Loading...' : 'Refresh'}
+        <button onClick={fetchAppointments} disabled={loading} className="refresh-btn" style={{ display: 'flex', alignItems: 'center' }}>
+          {loading ? (<><RefreshCw size={14} className="spin" style={{ marginRight: 8 }} />Loading...</>) : (<><RefreshCw size={14} style={{ marginRight: 8 }} />Refresh</>)}
         </button>
       </div>
 
@@ -127,8 +128,8 @@ const Appointments = () => {
                   <td>{appt.diagnosis || '-'}</td>
                   <td>{appt.followUpRequired ? 'Yes' : 'No'}</td>
                   <td className="actions">
-                    <Link to={`/appointments/${appt._id}/edit`} className="edit-btn">Edit</Link>
-                    <button onClick={() => deleteAppointment(appt._id)} className="delete-btn">Delete</button>
+                    <Link to={`/appointments/${appt._id}/edit`} style={{ color: 'white' }} className="edit-btn"><Edit2 size={14} style={{ marginRight: 6 }} />Edit</Link>
+                    <button onClick={() => deleteAppointment(appt._id)} className="delete-btn"><Trash2 size={14} style={{ marginRight: 6 }} />Delete</button>
                   </td>
                 </tr>
               ))}

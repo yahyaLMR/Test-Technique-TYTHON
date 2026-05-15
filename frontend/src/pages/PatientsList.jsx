@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { patientsAPI } from '../services/api';
 import '../styles/PatientsList.css';
+import { Plus, RefreshCw, Edit2, Trash2, Eye, X, Search } from 'lucide-react';
 
 const PatientsList = () => {
   const [patients, setPatients] = useState([]);
@@ -59,7 +60,7 @@ const PatientsList = () => {
           <h1>Patients</h1>
           <p>Search, review, and manage patient records.</p>
         </div>
-        <Link to="/patients/add" className="add-btn">+ Add Patient</Link>
+        <Link to="/patients/add" className="add-btn"><Plus size={14} style={{ marginRight: 6 }} /> Add Patient</Link>
       </div>
 
       <div className="patients-controls">
@@ -74,11 +75,11 @@ const PatientsList = () => {
           className="search-input"
           style={{ flex: 1 }}
         />
-        <button onClick={clearFilters} style={{ padding: '12px 20px', backgroundColor: '#999', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: '500' }}>
-          Clear
+        <button onClick={clearFilters} style={{ padding: '12px 20px', backgroundColor: '#999', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: '500', display: 'flex', alignItems: 'center' }}>
+          <X size={14} style={{ marginRight: 8 }} /> Clear
         </button>
-        <button onClick={fetchPatients} disabled={loading}>
-          {loading ? 'Loading...' : 'Refresh'}
+        <button onClick={fetchPatients} disabled={loading} style={{ display: 'flex', alignItems: 'center' }}>
+          {loading ? (<><RefreshCw size={14} className="spin" style={{ marginRight: 8 }} />Loading...</>) : (<><RefreshCw size={14} style={{ marginRight: 8 }} />Refresh</>)}
         </button>
       </div>
 
@@ -110,9 +111,9 @@ const PatientsList = () => {
                   <td>{patient.address || '-'}</td>
                   <td>{patient.createdAt ? new Date(patient.createdAt).toLocaleDateString() : '-'}</td>
                   <td className="actions">
-                    <Link to={`/patients/${patient._id}`} className="view-btn">View</Link>
-                    <Link to={`/patients/${patient._id}/edit`} className="edit-btn">Edit</Link>
-                    <button onClick={() => deletePatient(patient._id)} className="delete-btn">Delete</button>
+                    <Link to={`/patients/${patient._id}`} className="view-btn"><Eye size={14} style={{ marginRight: 6 }} />View</Link>
+                    <Link to={`/patients/${patient._id}/edit`} className="edit-btn"><Edit2 size={14} style={{ marginRight: 6 }} />Edit</Link>
+                    <button onClick={() => deletePatient(patient._id)} className="delete-btn"><Trash2 size={14} style={{ marginRight: 6 }} />Delete</button>
                   </td>
                 </tr>
               ))}

@@ -69,7 +69,7 @@ const PatientForm = ({ isEdit = false }) => {
 
   return (
     <div className="patient-form-container">
-      <button onClick={() => navigate('/patients')} className="back-link">← Back</button>
+      <button onClick={() => navigate('/patients')} className="back-button">← Back</button>
       <h1>{isEdit ? 'Edit Patient' : 'Add Patient'}</h1>
 
       {error && <div className="error-message">{error}</div>}

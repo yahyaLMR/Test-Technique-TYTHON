@@ -78,7 +78,7 @@ const AppointmentForm = ({ isEdit = false }) => {
 
   return (
     <div className="appointment-form-container">
-      <button onClick={() => navigate('/appointments')} className="back-link">← Back</button>
+      <button onClick={() => navigate('/appointments')} className="back-button">← Back</button>
       <h1>{isEdit ? 'Edit Appointment' : 'Create Appointment'}</h1>
 
       {error && <div className="error-message">{error}</div>}
