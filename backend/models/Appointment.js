@@ -27,6 +27,11 @@ const appointmentSchema = new mongoose.Schema({
     default: false
   },
   followUpDate: Date,
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now

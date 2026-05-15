@@ -86,7 +86,10 @@ async function seed() {
     ]);
 
     const createdUsers = await User.create(users);
-    const createdPatients = await Patient.create(patients);
+    // Attach createdBy (admin user) to seeded patients
+    const adminId = createdUsers[0]._id;
+    const patientsWithCreator = patients.map((p) => ({ ...p, createdBy: adminId }));
+    const createdPatients = await Patient.create(patientsWithCreator);
 
     const today = new Date();
     const appointments = appointmentTemplates.map((template) => ({
@@ -95,7 +98,8 @@ async function seed() {
       status: template.status,
       reason: template.reason,
       notes: `Seeded appointment for ${createdPatients[template.patientIndex].name}`,
-      followUpRequired: template.status === 'confirmed'
+      followUpRequired: template.status === 'confirmed',
+      createdBy: adminId
     }));
 
     await Appointment.create(appointments);

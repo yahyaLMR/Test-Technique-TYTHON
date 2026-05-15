@@ -32,6 +32,7 @@ exports.createPatient = async (req, res) => {
       phone,
       cin,
       address,
+      createdBy: req.user && req.user._id
     });
     await patient.save();
     res.status(201).json(patient);
@@ -78,6 +79,8 @@ exports.updatePatient = async (req, res) => {
   try {
     const id = req.params.id;
     const updates = req.body;
+    // Prevent changing the creator reference
+    if (updates && updates.createdBy) delete updates.createdBy;
     const patient = await Patient.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
     if (!patient) return res.status(404).json({ message: 'Patient not found' });
     res.json(patient);
